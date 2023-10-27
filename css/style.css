@@ -1,0 +1,637 @@
+/* BASE
+------------------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+	box-sizing: border-box;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+p,
+figure,
+blockquote,
+dl,
+dd {
+	margin: 0;
+}
+
+ul,
+ol {
+	list-style: none;
+}
+
+html:focus-within {
+	scroll-behavior: smooth;
+}
+
+html {
+	font-size: 100%;
+}
+
+body {
+	min-height: 100vh;
+	text-rendering: optimizeSpeed;
+	background-color: #fff;
+	color: hsl(207, 13%, 34%);
+	font-family: 'Overpass', sans-serif;
+	font-size: 1rem;
+	line-height: 1.5;
+	overflow-x: hidden; /* hide horizontal scrollbar on Desktop */
+}
+
+/* A elements that don't have a class get default styles */
+a:not([class]) { text-decoration-skip-ink: auto; }
+
+img,
+picture {
+	max-width: 100%;
+	display: block;
+}
+
+h1,
+h2,
+h3 {
+	font-family: 'Overpass', sans-serif;
+}
+
+/* UTILS
+------------------------------------------------------------------------------- */
+.fullbleed {
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+}
+
+.mtLarge { margin-top: 3.5rem; /* 56px */ }
+
+.mtMedium { margin-top: 3rem; /* 48px */ }
+
+.pcOnly {
+	display: none;
+}
+
+.lightTxt {
+	color: hsl(0, 0%, 100%);
+}
+
+@media screen and (min-width: 768px) {
+	.pcOnly {
+		display: block;
+	}
+
+	.spOnly {
+		display: none;
+	}
+}
+
+@keyframes dropAnim {
+	to {
+		opacity: 1;
+		transform: translateY(0);
+	}
+}
+
+@keyframes grow {
+	to {
+		opacity: 1;
+		transform: scaleY(1);
+	}
+}
+
+/* BUILDING BLOCKS
+------------------------------------------------------------------------------- */
+.logo {
+	width: 5.375rem;
+	height: auto;
+}
+
+.hamburger {
+	padding: 0.5rem 0;
+	cursor: pointer;
+}
+
+.headline {
+	font-size: 2.2rem;
+	line-height: 1.3;
+}
+
+.primaryTtl {
+	font-size: 2.2rem;
+	line-height: 1.3;
+	text-align: center;
+}
+
+.secondaryTtl,
+.tertiaryTtl {
+	font-size: 1.65rem;
+	line-height: 1.2;
+	text-align: center;
+	color: hsl(208, 49%, 24%);
+}
+
+.txt {
+	margin-top: 0.875rem;
+	padding: 0 1rem;
+	text-align: center;
+	font-size: 1rem;
+	line-height: 1.7;
+}
+
+.button {
+	display: block;
+	padding: 0.75rem 1rem;
+	font-weight: 700;
+	font-family: 'Ubuntu', sans-serif;
+	text-decoration: none;
+	border-radius: 2rem;
+}
+
+.buttonPrimary {
+	background-color: hsl(0, 0%, 100%);
+	color: hsl(356, 100%, 66%);
+}
+
+.buttonSecondary {
+	border: 1px solid hsl(0, 0%, 100%);
+	color: hsl(0, 0%, 100%);
+}
+
+.buttonSignup {
+	padding: 0.75rem 2.4rem;
+	background: linear-gradient(to right, hsl(13, 100%, 72%), hsl(353, 100%, 62%));
+	color: hsl(0, 0%, 100%);
+	max-width: 8.75rem;
+	margin: 0.75rem auto 0 auto;
+}
+
+/* BLOCKS (LAYOUT)
+------------------------------------------------------------------------------- */
+.container {
+	padding: 0 1.5rem;
+	max-width: 1155px;
+	margin: 0 auto;
+}
+
+/* MODULES
+------------------------------------------------------------------------------- */
+.header {
+	position: relative;
+	padding: 3.5rem 0 9.75rem 0;
+	background:
+		url('../images/bg-pattern-intro-mobile.svg') no-repeat 35% 35%,
+	    linear-gradient(145deg, hsl(13, 100%, 72%), hsl(353, 100%, 62%));
+	border-radius: 0 0 0 6.5rem;
+}
+
+.navbar {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.nav {
+	position: absolute;
+	top: 8rem;
+	min-width: 328px;
+	opacity: 0;
+	transform: translateY(-150%);
+	background-color: hsl(0, 0%, 100%);
+	border-radius: 0.5rem;
+}
+
+.navActive {
+	animation: dropAnim 500ms forwards;
+	animation-delay: 100ms;
+}
+
+.navMenu {
+	padding: 0;
+}
+
+.navMenu li {
+	padding: 0;
+	text-align: center;
+}
+
+.parentLink {
+	display: inline-block;
+	text-align: center;
+	padding: 0.75rem 1.063rem 0.75rem 0;
+	color: hsl(207, 13%, 34%);
+	font-size: 1.2rem;
+	font-weight: 700;
+	background: url(../images/icon-arrow-dark.svg) no-repeat center right;
+	text-decoration: none;
+}
+
+.navSubmenu {
+	margin: 0 1.5rem;
+	padding: 0;
+	opacity: 0;
+	transform: scaleY(0);
+	height: 0;
+	background: hsl(240, 2%, 79%, 0.3);
+	border-radius: 0.5rem;
+}
+
+.navSubmenu a {
+	display: block;
+	padding: 0.5rem 0;
+	text-decoration: none;
+	color: hsl(207, 13%, 34%);
+	font-weight: 700;
+}
+
+.navSubmenuActive {
+	padding: 1rem 0;
+	height: auto;
+	animation: grow 300ms forwards;
+	animation-delay: 100ms;
+}
+
+.navAccount {
+	margin: 1.5rem;
+	padding: 1rem 0;
+	border-top: 1px solid hsl(240, 2%, 79%, 0.5);
+}
+
+.navAccount li {
+	text-align: center;
+}
+
+.navAccount .parentLink {
+	padding-right: 0;
+	background: none;
+}
+
+.banner {
+	margin-top: 6.65rem;
+	text-align: center;
+	color: hsl(0, 0%, 100%);
+}
+
+.bannerTxt {
+	margin-top: 0.8rem;
+	font-size: 1.2rem;
+	line-height: 1.3;
+}
+
+.bannerCta {
+	margin: 2.8rem 0 0 0;
+	padding: 0;
+	display: flex;
+	justify-content: center;
+	gap: 1rem;
+}
+
+.bannerCta > li {
+	flex: 1;
+}
+
+/** design section */
+.design {
+	margin: 6.5rem 0 0 0;
+}
+
+.designImg {
+	margin-top: 2.65rem;
+}
+
+.designContent {
+	margin: 5rem 0 0 0;
+}
+
+/** infrastructure */
+.infrastructure {
+	position: relative;
+	margin-top: 17.65rem;
+	padding: 14rem 0 8.25rem 0;
+	background:
+		url('../images/bg-pattern-circles.svg') no-repeat 50% -15.75rem,
+	    linear-gradient(145deg, hsl(237, 17%, 21%), hsl(237, 23%, 32%));
+	background-size: cover;
+	border-radius: 0 6.5rem 0 6.5rem;
+}
+
+.infrastructureImg {
+	position: absolute;
+	top: -11.5rem;
+	left: 0;
+	right: 0;
+	margin-inline: auto;
+}
+
+.features {
+	margin: 6rem 0 0 0;
+}
+
+.features .sectionInner {
+	margin: 3.5rem 0 0 0;
+}
+
+/** site footer */
+.footer {
+	margin: 6.563rem 0 0 0;
+	padding: 4.5rem 0 2rem 0;
+	background-color: hsl(240, 10%, 16%);
+	border-radius: 0 6.5rem 0 0;
+}
+
+.footerLogo img {
+	margin: 0 auto;
+}
+
+.footerMenu {
+	margin: 5.125rem 0 0 0;
+	padding: 0;
+}
+
+.footerMenu li {
+	text-align: center;
+}
+
+.footerMenu > li:not(:first-child) {
+	margin-top: 3rem;
+}
+
+.footerSubmenu {
+	margin: 1.5rem 0 0 0;
+	padding: 0;
+}
+
+.footerMainLink,
+.footerSubLink {
+	font-size: 1.125rem;
+	text-decoration: none;
+	color: hsl(0, 0%, 100%);
+}
+
+.footerSubLink {
+	display: block;
+	padding: 0.125rem 0;
+}
+
+.footerMainLink {
+	font-weight: 700;
+}
+
+.attribution {
+	margin-top: 5.25rem;
+	font-size: 11px;
+	text-align: center;
+}
+
+.attribution a { color: hsl(228, 45%, 44%); }
+
+
+/* MEDIA QUERIES
+------------------------------------------------------------------------------- */
+@media screen and (min-width: 768px) {
+
+	/**
+	 * UTILS
+	 *
+	 */
+ 	.mtMedium {
+		margin-top: 5rem; /* 80px */
+	}
+
+	.mtLarge {
+		margin-top: 5rem; /* 80px */
+	}
+
+	/**
+	 * BUILDING BLOCKS
+	 *
+	 */
+	.logo {
+		width: 101px;
+		height: 40px;
+		flex-basis: auto;
+	}
+
+	.hamburger {
+		display: none;
+	}
+
+	.headline {
+		font-size: 4rem;
+		line-height: 1.3;
+	}
+
+	.secondaryTtl {
+		font-size: 2.4rem;
+	}
+
+	.primaryTtl,
+	.tertiaryTtl {
+		text-align: left;
+	}
+
+	.txt {
+		margin-top: 1.65rem;
+		padding: 0;
+		text-align: left;
+	}
+
+	.link {
+		color: hsl(0, 0%, 100%);
+		font-weight: 700;
+		text-decoration: none;
+	}
+
+	.parentLink {
+		padding: 0 1.25rem 0 0;
+		background: url('../images/icon-arrow-light.svg') no-repeat right center;
+	}
+
+	.buttonSignup {
+		padding: 0.75rem 2.4rem;
+		background: hsl(0, 0%, 100%);
+		color: hsl(356, 100%, 66%);
+		max-width: 8.75rem;
+		margin: 0;
+	}
+
+	/**
+	 *  MODULES
+	 *
+	 */
+	.header {
+		padding: 2.6rem 0 9.5rem 0;
+		background:
+			url('../images/bg-pattern-intro-desktop.svg') no-repeat 35% 50%,
+		    linear-gradient(145deg, hsl(13, 100%, 72%), hsl(353, 100%, 62%));
+	}
+
+	.navbar {
+		justify-content: flex-start;
+		gap: 4rem;
+	}
+
+	.nav {
+		position: static;
+		opacity: 1;
+		transform: translateY(0);
+		background-color: transparent;
+		flex-grow: 1;
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.navMenu {
+		display: flex;
+		align-items: center;
+		gap: 2rem;
+		margin: 0;
+		padding: 0;
+	}
+
+	.navMenu li {
+		position: relative;
+	}
+
+	.navSubmenu {
+		position: absolute;
+		top: 3rem;
+		left: -1.5rem;
+		margin: 0;
+		padding: 0;
+		min-width: 200px;
+		opacity: 0;
+		transform: scaleY(0);
+		height: 0;
+		background: hsl(0, 0%, 100%);
+		border-radius: 0.5rem;
+	}
+
+	.navSubmenu a:link, a:visited, a:active {
+		font-weight: 400;
+	}
+
+	.navSubmenu a:hover {
+		font-weight: 700;
+	}
+
+	.navSubmenuActive {
+		padding: 1rem 1.5rem;
+		height: auto;
+		animation: grow 300ms forwards;
+		animation-delay: 100ms;
+	}
+
+	.navSubmenu li {
+		text-align: left;
+	}
+
+	.navAccount {
+		display: flex;
+		align-items: center;
+		gap: 2rem;
+		margin: 0;
+		padding: 0;
+		border-top: 0;
+	}
+
+	.banner {
+		margin-top: 7rem;
+	}
+
+	.bannerCta li {
+		flex-grow: 0;
+		flex-shrink: 1;
+		flex-basis: 8.75rem;
+	}
+
+	/** DESIGN SECTION */
+	.design {
+		position: relative;
+		margin: 9.65rem 0 0 0;
+	}
+
+	.designImg {
+		position: absolute;
+		right: -19%;
+		top: -21%;
+	}
+
+	.designContent {
+		margin: 6.75rem 0 0 0;
+		max-width: 31rem;
+	}
+
+	/** INFRASTRUCTURE */
+	.infrastructure {
+		margin-top: 16.25rem;
+		padding: 7.25rem 0 8rem 0;
+		background:
+			url('../images/bg-pattern-circles.svg') no-repeat -13.5rem -31.75rem,
+		    linear-gradient(145deg, hsl(237, 17%, 21%), hsl(237, 23%, 32%));
+		background-size: auto;
+	}
+
+	.infrastructure .container {
+		position: relative;
+	}
+
+	.infrastructureImg {
+		top: -11.65rem;
+		left: -1.125rem;
+	}
+
+	.sectionInner {
+		padding-left: 35.5rem;
+	}
+
+	/** FEATURES */
+	.features {
+		margin-top: 19.25rem;
+		position: relative;
+	}
+
+	.featuresImg {
+		position: absolute;
+		left: -19.4%;
+		top: -46%;
+	}
+
+	/** SITE FOOTER */
+	.footer {
+		margin: 19rem 0 0 0;
+	}
+
+	.footer .container {
+		display: flex;
+		gap: 11.45rem;
+	}
+
+	.footerMenu {
+		display: flex;
+		gap: 12.5rem;
+		margin: 0.25rem 0 0 0;
+	}
+
+	.footerMenu li {
+		text-align: left;
+	}
+
+	.footerMenu > li:not(:first-child) {
+  		margin-top: 0;
+	}
+
+	.footerMainLink,
+	.footerSubLink {
+		font-size: 1rem;
+	}
+
+	.footerSubmenu {
+		margin: 1.75rem 0 0 0;
+	}
+
+	.footerSubmenu > li:not(:first-child) {
+		padding-top: .5rem;
+	}
+}
