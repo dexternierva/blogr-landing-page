@@ -218,13 +218,29 @@ h3 {
 
 .parentLink {
 	display: inline-block;
+	position: relative;
 	text-align: center;
 	padding: 0.75rem 1.063rem 0.75rem 0;
 	color: hsl(207, 13%, 34%);
 	font-size: 1.2rem;
 	font-weight: 700;
-	background: url(../images/icon-arrow-dark.svg) no-repeat center right;
 	text-decoration: none;
+}
+
+.parentLink::after {
+	content: "";
+	position: absolute;
+	top: 50%;
+	right: 0;
+	transform: translateY(-50%);
+	background: url(../images/icon-arrow-dark.svg) no-repeat center right;
+	width: 10px;
+	height: 7px;
+	transition: all 100ms ease-in-out;
+}
+
+.parentLink.active::after {
+	transform: translateY(-50%) rotate(180deg);
 }
 
 .navSubmenu {
@@ -264,7 +280,11 @@ h3 {
 
 .navAccount .parentLink {
 	padding-right: 0;
-	background: none;
+}
+
+.navAccount .parentLink::after {
+	padding-right: 0;
+	content: none;
 }
 
 .banner {
@@ -445,7 +465,10 @@ h3 {
 
 	.parentLink {
 		padding: 0 1.25rem 0 0;
-		background: url('../images/icon-arrow-light.svg') no-repeat right center;
+	}
+
+	.parentLink::after {
+		background: url(../images/icon-arrow-light.svg) no-repeat center right;
 	}
 
 	.buttonSignup {

@@ -20,6 +20,7 @@ parentLink.forEach((link) => {
 
 	link.addEventListener('click', (evt) => {
 		evt.preventDefault();
+		link.classList.toggle('active');
 		submenu.classList.toggle('navSubmenuActive');
 	})
 })
